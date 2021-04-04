@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 04:02:08 by kyuki             #+#    #+#             */
-/*   Updated: 2021/03/31 13:21:34 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/04 06:19:36 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_set_win(t_sys *s, char *line, int *i)
 	if (s->win.h > 1260)
 		s->win.h = 1260;
 	ft_spaceskip(line, i);
-	if (s->win.w <= 0 || s->win.h <= 0 || line[*i] != '\0')
+	if (s->win.w <= 1 || s->win.h <= 1 || line[*i] != '\0')
 		return (-2);
 	s->win.exist = 1;
 	ft_create_mlx(s);

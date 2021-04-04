@@ -54,6 +54,7 @@ OBJS	=	$(SRCS:.c=.o)
 
 BOBJS	=	$(BSRCS:.c=.o)
 
+.PHONY: all
 all		:	$(NAME)
 
 $(MLX)	:
@@ -68,6 +69,7 @@ $(NAME) :	$(MLX) ${OBJS}
 			$(CC) ${OBJS} libmlx_Linux.a libft.a $(CFLAGS) $(LXFLAGS) -o ${NAME}
 			@echo "Complete\033[0m"
 
+.PHONY: san
 san		:	$(MLX) ${OBJS}
 			@echo "\n\033[0;32mCompiling..."
 			$(MAKE) -C ./libft
@@ -76,6 +78,7 @@ san		:	$(MLX) ${OBJS}
 			$(CC) ${OBJS} -g -fsanitize=address libmlx_Linux.a libft.a $(CFLAGS) $(LXFLAGS) -o ${NAME}
 			@echo "Complete\033[0m"
 
+.PHONY: val
 val		:	$(MLX) ${OBJS}
 			$(MAKE) -C ./libft
 			cp ./minilibx-linux/libmlx_Linux.a .
@@ -83,6 +86,7 @@ val		:	$(MLX) ${OBJS}
 			$(CC) -g ${OBJS} libmlx_Linux.a libft.a $(CFLAGS) $(LXFLAGS) -o ${NAME}
 			$(VALGRIND) $(VALFLAGS) ./cub3D maps/error.cub
 
+.PHONY: clean
 clean	:	${MLX}
 			@echo "\033[0;33mCleaning..."
 			$(RM) $(OBJS) $(BOBJS)
@@ -91,14 +95,17 @@ clean	:	${MLX}
 			$(MAKE) clean -C ./${MLX}
 			@echo "\033[0m"
 
+.PHONY: fclean
 fclean	:	clean
 			@echo "\033[0;33mRemoving executable..."
 			$(MAKE) fclean -C ./libft
 			$(RM) $(NAME) libft.a libmlx_Linux.a
 			@echo "\033[0m"
 
+.PHONY: re
 re		:	fclean all
 
+.PHONY: bonus
 bonus:	fclean $(MLX) $(BOBJS)
 		@echo "\n\033[0;32mCompiling..."
 		$(MAKE) -C ./libft
@@ -108,28 +115,34 @@ bonus:	fclean $(MLX) $(BOBJS)
 		$(CC) ${BOBJS} libmlx_Linux.a libft.a $(CFLAGS) $(LXFLAGS) -o ${NAME}
 		@echo "Complete\033[0m"
 
+.PHONY: test1
 test1	:
 			./$(NAME) maps/map01.cub
 
+.PHONY: test2
 test2	:
 			./$(NAME) maps/map02.cub
 
+.PHONY: test3
 test3	:
 			./$(NAME) maps/map03.cub
 
+.PHONY: error
 error	:
 			./$(NAME) maps/error.cub
 
+.PHONY: vast
 vast	:
 			./$(NAME) maps/vast.cub
 
+.PHONY: big
 big		:
 			./$(NAME) maps/big.cub
 
+.PHONY: small
 small	:
 			./$(NAME) maps/small.cub
 
+.PHONY: bmp
 bmp		:
 			./$(NAME) maps/map01.cub --save
-
-.PHONY: all clean fclean re bonus

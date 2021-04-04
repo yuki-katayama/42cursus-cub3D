@@ -56,8 +56,10 @@ $(NAME):	$(OBJS)
 			$(CC) ${OBJS} ./libft/libft.a -L $(MLX) $(LXFLAGS) $(CFLAGS) -o ${NAME}
 			@echo "Complete\033[0m"
 
+.PHONY:	all
 all:		$(NAME)
 
+.PHONY:	san
 san: 		$(OBJS)
 			@echo "\n\033[0;32mCompiling..."
 			$(MAKE) -C ./libft
@@ -65,6 +67,7 @@ san: 		$(OBJS)
 			$(CC) ${OBJS} -g -fsanitize=address libft.a -L $(MLX) $(LXFLAGS) $(CFLAGS) -o ${NAME}
 			@echo "Complete\033[0m"
 
+.PHONY:	clean
 clean:
 			@echo "\033[0;33mCleaning..."
 			$(RM) $(OBJS)
@@ -74,13 +77,14 @@ clean:
 			$(MAKE) clean -C ./libft
 			@echo "\033[0m"
 
-
+.PHONY:	fclean
 fclean:		clean
 			@echo "\033[0;33mRemoving executable..."
 			$(MAKE) fclean -C ./libft
 			$(RM) $(NAME) ./libft.a
 			@echo "\033[0m"
 
+.PHONY:	bonus
 bonus:		fclean $(BOBJS)
 			@echo "\n\033[0;32mCompiling..."
 			$(MAKE) -C ./mlx
@@ -89,31 +93,37 @@ bonus:		fclean $(BOBJS)
 			$(CC) ${BOBJS} libft.a -L $(MLX) $(LXFLAGS) $(CFLAGS) -o ${NAME}
 			@echo "Complete\033[0m"
 
+.PHONY:	re
 re:			fclean all
 
-
+.PHONY: test1
 test1:
 			./$(NAME) maps/map01.cub
 
+.PHONY:	test2
 test2:
 			./$(NAME) maps/map02.cub
 
+.PHONY:	test3
 test3:
 			./$(NAME) maps/map03.cub
 
+.PHONY:	error
 error:
 			./$(NAME) maps/error.cub
 
+.PHONY:	vast
 vast:
 			./$(NAME) maps/vast.cub
 
+.PHONY:	big
 big:
 			./$(NAME) maps/big.cub
 
+.PHONY:	small
 small:
 			./$(NAME) maps/small.cub
 
+.PHONY:	bmp
 bmp:
 			./$(NAME) maps/map01.cub --save
-
-.PHONY: all clean fclean re bonus

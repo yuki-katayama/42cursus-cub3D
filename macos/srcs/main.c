@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/01 03:22:14 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/01 03:22:30 by kyuki            ###   ########.fr       */
+/*   Created: 2021/03/19 18:26:10 by kyuki             #+#    #+#             */
+/*   Updated: 2021/04/04 11:31:23 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,23 @@ static int	ft_loop(t_sys *s)
 	return (SUCCESS);
 }
 
+static void	ft_hook(t_sys *s)
+{
+	mlx_hook(s->win.ptr, 17, 1L << 17, ft_close, s);
+	mlx_hook(s->win.ptr, 2, 1L << 0, ft_press_key, s);
+	mlx_hook(s->win.ptr, 3, 1L << 1, ft_release_key, s);
+	mlx_loop_hook(s->mlx.ptr, &ft_loop, s);
+	mlx_loop(s->mlx.ptr);
+}
+
 int			main(int argc, char **argv)
 {
 	t_sys	s;
+	int		fd;
 
-	if ((argc == 2) || (argc == 3 && ft_strcmp(argv[2], "--save") == 0))
+	fd = open(argv[1], O_DIRECTORY);
+	if (((argc == 2) || (argc == 3 && ft_strcmp(argv[2], "--save") == 0))
+			&& fd < 0)
 	{
 		s.bmp = 1;
 		if (argc == 3)
@@ -49,12 +61,10 @@ int			main(int argc, char **argv)
 			ft_bitmap(&s);
 			return (EXIT);
 		}
-		mlx_hook(s.win.ptr, 17, 1L << 17, ft_close, &s);
-		mlx_hook(s.win.ptr, 2, 1L << 0, ft_press_key, &s);
-		mlx_hook(s.win.ptr, 3, 1L << 1, ft_release_key, &s);
-		mlx_loop_hook(s.mlx.ptr, &ft_loop, &s);
-		mlx_loop(s.mlx.ptr);
+		ft_hook(&s);
 	}
+	else if (fd > 0)
+		return (ft_error(-37, -1));
 	else
 		return (ft_error(-26, -1));
 	return (EXIT);
