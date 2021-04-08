@@ -1,0 +1,21 @@
+R 300 300
+
+NO ./textures/eagle.xpm
+
+SO ./textures/mossystone.xpm
+
+WE ./textures/bluestone.xpm
+
+EA ./textures/colorstone.xpm
+
+S ./textures/barrel.xpm
+
+F 88, 88, 88
+
+C 44,44,44
+
+10101
+01010
+10S21
+01010
+10101
