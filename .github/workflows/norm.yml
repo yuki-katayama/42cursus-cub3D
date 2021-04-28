@@ -22,4 +22,5 @@
            python3 -m pip install norminette
          
        - name: Run Norminette
-         run: norminette
+         run: norminette libft/.
+		 run: norminette srcs/.
