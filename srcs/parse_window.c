@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 04:02:08 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/08 13:33:34 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/25 00:29:43 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ int	ft_set_win(t_sys *s, char *line, int *i)
 	s->win.exist = 1;
 	ft_create_mlx(s);
 	mlx_get_screen_size(s->mlx.ptr, &w, &h);
-	if (s->win.w > w)
-		s->win.w = w;
-	if (s->win.h > h)
-		s->win.h = h;
+	if (s->bmp == 0 || (s->bmp == 1 && \
+		(s->win.h > BMP_MAX_HEIGHT || s->win.w > BMP_MAX_HEIGHT)))
+	{
+		if (s->win.w > w)
+			s->win.w = w;
+		if (s->win.h > h)
+			s->win.h = h;
+	}
 	return (SUCCESS);
 }

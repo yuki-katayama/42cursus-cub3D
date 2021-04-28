@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 00:02:34 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/08 13:25:25 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/27 00:09:39 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	ft_confirm_file(t_sys *s, t_pixel *adr, char *file)
 	fd = open(file, O_RDONLY);
 	if (*file == '\0')
 		return (-15);
+	else if (file[0] != '.')
+		return (-8);
 	else if (ft_haschar(file, '.') == -1)
 		return (-16);
 	else if (ft_check_extension(file, ".xpm") == -1)
@@ -40,8 +42,6 @@ static int	ft_confirm_file(t_sys *s, t_pixel *adr, char *file)
 		return (-7);
 	close(fd);
 	ft_create_texture(s, adr, file);
-	if (s->tex.width != TILE_SIZE || s->tex.height != TILE_SIZE)
-		return (-8);
 	return (SUCCESS);
 }
 

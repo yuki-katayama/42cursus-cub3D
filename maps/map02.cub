@@ -1,12 +1,11 @@
-R 300 300
+R 800 800
 
-NO ./textures/eagle.xpm
+NO ./textures/eagle(2).xpm
 
-SO ./textures/mossystone.xpm
+SO ./textures/eagle(10).xpm
+WE ./textures/sample(1280)(853).xpm
 
-WE ./textures/bluestone.xpm
-
-EA ./textures/colorstone.xpm
+EA ./textures/sample(1920)(1280).xpm
 
 S ./textures/barrel.xpm
 
@@ -14,8 +13,8 @@ F 88, 88, 88
 
 C 44,44,44
 
-10101
-01010
-10S21
-01010
+00101
+01110
+11S21
+01110
 10101

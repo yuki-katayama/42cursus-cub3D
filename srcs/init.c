@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 23:39:16 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/08 15:26:25 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/27 12:29:13 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void	ft_init01(t_sys *s)
 	s->map.max_cols = MAP_WIDTH;
 	s->map.max_rows = 0;
 	s->map.num_spr = 0;
+	s->map.already = 0;
 	s->spr = NULL;
 	s->rays = NULL;
 	s->tex.n.ptr = NULL;

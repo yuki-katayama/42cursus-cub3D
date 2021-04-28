@@ -41,10 +41,10 @@ static void	ft_copy_tmp_to_map(char **tmp, t_sys *s)
 	i = -1;
 	if (s->map.num_spr > 0)
 	{
-		while ((int)s->spr[++i].x > 0 && (int)s->spr[i].y > 0)
+		while (((int)s->spr[++i].x > 0) && ((int)s->spr[i].y > 0))
 		{
-			x = floor((s->spr[i].x) / TILE_SIZE);
-			y = floor((s->spr[i].y) / TILE_SIZE);
+			x = floor(s->spr[i].x / TILE_SIZE);
+			y = floor(s->spr[i].y / TILE_SIZE);
 			tmp[y][x] = '2';
 		}
 	}
@@ -71,7 +71,7 @@ int	ft_check_map(t_sys *s)
 	i = -1;
 	while (++i < MAP_HEIGHT)
 	{
-		if (!(ft_malloc_p((void **)&tmp[i], sizeof(char) * (MAP_WIDTH) + 1)))
+		if (!(ft_malloc_p((void **)&tmp[i], sizeof(char **) * (MAP_WIDTH) + 1)))
 		{
 			ft_free_tmp(tmp, i + 1);
 			return (FAILED - 1);
