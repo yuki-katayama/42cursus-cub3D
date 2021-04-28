@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 00:01:54 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/06 15:10:43 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/25 00:26:09 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	ft_set_player(t_sys *s, int x, int y, char c)
 {
 	if (s->player.num_player == 1)
 		return (FAILED);
-	s->player.x = ((TILE_SIZE * x) + (TILE_SIZE / 2));
-	s->player.y = ((TILE_SIZE * y) + (TILE_SIZE / 2));
+	s->player.x = ((TILE_SIZE * x) + (TILE_SIZE / 2) + 0.01);
+	s->player.y = ((TILE_SIZE * y) + (TILE_SIZE / 2) + 0.01);
 	if (c == 'S')
 		s->player.rot_a += PI / 2;
 	else if (c == 'W')

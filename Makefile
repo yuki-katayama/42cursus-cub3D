@@ -2,7 +2,7 @@ NAME	=	cub3D
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wextra -Wall -Werror
 
 
 MLX		= minilibx-linux
@@ -19,6 +19,7 @@ VALFLAGS = --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all -
 
 SRCNAME	=	main\
 			wall\
+			wall2\
 			ray\
 			ray_vert \
 			ray_horz \
@@ -85,7 +86,7 @@ val		:	$(MLX) ${OBJS}
 			cp ./minilibx-linux/libmlx_Linux.a .
 			cp ./libft/libft.a .
 			$(CC) -g ${OBJS} libmlx_Linux.a libft.a $(CFLAGS) $(LXFLAGS) -o ${NAME}
-			$(VALGRIND) $(VALFLAGS) ./cub3D maps/error.cub
+			$(VALGRIND) $(VALFLAGS) ./cub3D ./maps/error.cub
 
 .PHONY: clean
 clean	:	${MLX}

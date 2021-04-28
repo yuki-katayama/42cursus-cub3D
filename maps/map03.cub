@@ -1,4 +1,4 @@
-R 1200 900
+R 100 100
 
 NO ./textures/eagle.xpm
 
@@ -6,11 +6,11 @@ SO ./textures/mossystone.xpm
 
 WE ./textures/bluestone.xpm
 
-EA ./textures/colorstone.xpm
+EA ./textures/.xpm
 
-S ./textures/barrel.xpm
+S ./textures/Document(256)(256).xpm
 
-F 88, 88, 88
+F 88,88, 88
 
 C 44,44,44
 

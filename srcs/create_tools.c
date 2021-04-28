@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 02:34:33 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/08 17:18:36 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/28 10:50:11 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ void	ft_create_texture(t_sys *s, t_pixel *adr, char *file)
 	int		tmp[0];
 
 	adr->ptr = mlx_xpm_file_to_image(\
-		s->mlx.ptr, file, &s->tex.width, &s->tex.height);
+		s->mlx.ptr, file, &adr->width, &adr->height);
+	if (adr->ptr == NULL)
+	{
+		ft_error(-18, -1);
+		ft_close(s);
+	}
 	adr->buf = (uint32_t *)mlx_get_data_addr(\
 		adr->ptr, &tmp[0], &tmp[0], &tmp[0]);
 }
@@ -49,7 +54,8 @@ int	ft_create_spr_list(t_sys *s)
 	int		i;
 	int		y;
 
-	if (!(ft_malloc_p((void **)&s->spr, sizeof(t_sprite) * s->map.num_spr + 1)))
+	if (!(ft_malloc_p((void **)&s->spr, sizeof(t_sprite) \
+			* s->map.num_spr + sizeof(t_sprite))))
 		return (ft_error(-27, -1));
 	x = -1;
 	i = -1;
@@ -65,5 +71,7 @@ int	ft_create_spr_list(t_sys *s)
 			}
 		}
 	}
+	s->spr[i + 1].x = 0;
+	s->spr[i + 1].y = 0;
 	return (SUCCESS);
 }

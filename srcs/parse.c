@@ -6,13 +6,33 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 04:08:32 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/08 18:32:14 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/28 20:14:15 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	get_map_rows(char *path, t_sys *s)
+void	ft_invert_pixel(t_pixel *tex)
+{
+	int			i;
+	int			j;
+	uint32_t	tmp;
+
+	i = -1;
+	while (++i < tex->width / 2)
+	{
+		j = -1;
+		while (++j < tex->height)
+		{
+			tmp = tex->buf[j * tex->width + i];
+			tex->buf[j * tex->width + i] = \
+				tex->buf[j * tex->width + (tex->width - i - 1)];
+			tex->buf[j * tex->width + (tex->width - i - 1)] = tmp;
+		}
+	}
+}
+
+static void	ft_get_map_rows(char *path, t_sys *s)
 {
 	int		fd;
 	int		ret;
@@ -20,6 +40,7 @@ static void	get_map_rows(char *path, t_sys *s)
 
 	ret = 1;
 	fd = open(path, O_RDONLY);
+	line = NULL;
 	while (ret == 1)
 	{
 		ret = get_next_line(fd, &line);
@@ -27,6 +48,13 @@ static void	get_map_rows(char *path, t_sys *s)
 		free(line);
 	}
 	close(fd);
+}
+
+static void	ft_gnl_free(int fd, char **line)
+{
+	while (get_next_line(fd, line))
+		free(*line);
+	free(*line);
 }
 
 static int	ft_parse_rows(int fd, t_sys *s)
@@ -39,20 +67,21 @@ static int	ft_parse_rows(int fd, t_sys *s)
 	ret = 1;
 	while (ret == 1)
 	{
-		ret = get_next_line(fd, &line);
 		if (ret == -1)
 		{
 			ft_error(-37, -1);
+			ret = -2;
 			break ;
 		}
+		ret = get_next_line(fd, &line);
 		if (ft_check_line(s, line, ++row) == -1)
 			ret = -1;
 		free(line);
 	}
 	s->map.rows++;
-	while (get_next_line(fd, &line))
-		free(line);
-	free(line);
+	if (ret == -2)
+		ft_close(s);
+	ft_gnl_free(fd, &line);
 	close(fd);
 	return (ret);
 }
@@ -62,7 +91,7 @@ int	ft_parse(t_sys *s, char *path)
 	int		fd;
 	int		ret;
 
-	get_map_rows(path, s);
+	ft_get_map_rows(path, s);
 	fd = open(path, O_RDONLY);
 	if (fd == -1 || ft_strchr(path, '/') == NULL || !ft_strchr(path, '/')[1])
 		return (ft_error(-4, -1));
@@ -77,5 +106,7 @@ int	ft_parse(t_sys *s, char *path)
 	if (s->bmp == 0)
 		ft_create_window(s);
 	ft_create_pixels(s);
+	ft_invert_pixel(&s->tex.n);
+	ft_invert_pixel(&s->tex.e);
 	return (SUCCESS);
 }

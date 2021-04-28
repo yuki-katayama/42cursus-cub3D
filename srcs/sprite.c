@@ -6,13 +6,13 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 13:35:12 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/08 13:33:14 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/28 10:52:30 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_find_visible_sprites(int *num_visi_sprs,
+static void ft_find_visible_sprites(int *num_visi_sprs,
 										t_sprite *visi_sprs, t_sys *s)
 {
 	float	a_spr_pl;
@@ -80,8 +80,8 @@ static void	ft_set_sprite_info(t_sprite_tool *tool, t_sprite spr, t_sys *s)
 	tool->screen_pos_x = tan(tool->angle) * s->dist_plane;
 	tool->left_x = ((s->win.w / 2) + tool->screen_pos_x) - (tool->w / 2);
 	tool->right_x = tool->left_x + tool->w;
-	tool->tex_w = s->tex.width;
-	tool->tex_h = s->tex.height;
+	tool->tex_w = s->tex.i.width;
+	tool->tex_h = s->tex.i.height;
 }
 
 static void	ft_draw_sprite(t_sprite_tool *tool, t_sprite spr, t_sys *s)
@@ -93,20 +93,20 @@ static void	ft_draw_sprite(t_sprite_tool *tool, t_sprite spr, t_sys *s)
 	while (++x < tool->right_x)
 	{
 		tool->texel_w = (tool->tex_w / tool->w);
-		tool->tex_ofs_x = (x - tool->left_x) * tool->texel_w;
+		tool->tex_ofs_x = ((x - tool->left_x) * tool->texel_w);
 		y = tool->top_y;
 		while (++y < tool->bottom_y)
 		{
 			if (x > 0 && x < s->win.w && y > 0 && y < s->win.h)
 			{
-				tool->distance_from_top = \
-					y + (tool->h / 2) - (s->win.h / 2);
+				tool->distance_from_top = y + (tool->h / 2) - (s->win.h / 2);
 				tool->tex_ofs_y = \
 					tool->distance_from_top * (tool->tex_h / tool->h);
 				tool->buff = s->tex.i.buf;
 				tool->c = \
 				tool->buff[(tool->tex_w * tool->tex_ofs_y) + tool->tex_ofs_x];
-				if (spr.distance < s->rays[x].distance && tool->c != 0x000000)
+				if (spr.distance < s->rays[x].distance
+					&& tool->c != 0x000000)
 					ft_draw_pixel(x, y, tool->c, s);
 			}
 		}

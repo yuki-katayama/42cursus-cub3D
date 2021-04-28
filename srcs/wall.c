@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   wall.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/24 15:39:39 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/06 14:32:06 by kyuki            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 static void	ft_change_color_intensity(uint32_t *color, float factor)
@@ -35,41 +23,6 @@ static void	ft_set_wall_info(int x, t_wall_tool *tool, t_sys *s)
 	tool->wall_bottom_y = (s->win.h / 2) + (tool->wall_h / 2);
 	if (tool->wall_bottom_y > s->win.h)
 		tool->wall_bottom_y = s->win.h;
-	if (s->rays[x].was_hit_vertical)
-		tool->tex_ofs_x = (int)s->rays[x].hit_y % TILE_SIZE;
-	else
-		tool->tex_ofs_x = (int)s->rays[x].hit_x % TILE_SIZE;
-	tool->tex_w = s->tex.width;
-	tool->tex_h = s->tex.height;
-}
-
-static void	ft_set_tex_to_wall(int x, int y, t_wall_tool *tool, t_sys *s)
-{
-	tool->fr_top = y + (tool->wall_h / 2) - (s->win.h / 2);
-	tool->tex_ofs_y = tool->fr_top * ((float)tool->tex_h / tool->wall_h);
-	tool->texel_color = 0;
-	if (s->rays[x].was_hit_vertical)
-	{
-		if (s->rays[x].was_hit_east == TRUE)
-			tool->texel_color = \
-				s->tex.e.buf[(tool->tex_w * tool->tex_ofs_y) + tool->tex_ofs_x];
-		else
-			tool->texel_color = \
-				s->tex.w.buf[(tool->tex_w * tool->tex_ofs_y) + tool->tex_ofs_x];
-	}
-	else
-	{
-		if (s->rays[x].was_hit_north == TRUE)
-			tool->texel_color = \
-				s->tex.n.buf[(tool->tex_w * tool->tex_ofs_y) + tool->tex_ofs_x];
-		else
-			tool->texel_color = \
-				s->tex.s.buf[(tool->tex_w * tool->tex_ofs_y) + tool->tex_ofs_x];
-	}
-	if (s->rays[x].was_hit_vertical)
-		ft_change_color_intensity(&tool->texel_color, VERT_INTENSITY);
-	else
-		ft_change_color_intensity(&tool->texel_color, HORZ_INTENSITY);
 }
 
 void	ft_render_wall_projection(t_sys *s)
@@ -89,6 +42,10 @@ void	ft_render_wall_projection(t_sys *s)
 		while (++y < tool.wall_bottom_y)
 		{
 			ft_set_tex_to_wall(x, y, &tool, s);
+			if (s->rays[x].was_hit_vertical)
+				ft_change_color_intensity(&tool.texel_color, VERT_INTENSITY);
+			else
+				ft_change_color_intensity(&tool.texel_color, HORZ_INTENSITY);
 			ft_draw_pixel(x, y, tool.texel_color, s);
 		}
 		y = tool.wall_bottom_y - 1;

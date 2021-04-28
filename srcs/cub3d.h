@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 03:08:30 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/08 15:42:04 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/28 10:50:31 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@
 
 # define EPSILON 0.3
 
+# define BMP_MAX_WIDTH 20000
+# define BMP_MAX_HEIGHT 20000
+
 typedef struct s_player {
 	float	x;
 	float	y;
@@ -102,6 +105,8 @@ typedef struct s_pixel
 {
 	void		*ptr;
 	uint32_t	*buf;
+	int			width;
+	int			height;
 }				t_pixel;
 
 typedef struct s_texture
@@ -113,8 +118,6 @@ typedef struct s_texture
 	t_pixel	i;
 	int		f;
 	int		c;
-	int		width;
-	int		height;
 }				t_texture;
 
 typedef struct s_mlx
@@ -124,14 +127,15 @@ typedef struct s_mlx
 
 typedef struct s_win
 {
-	void	*ptr;
 	uint8_t	exist;
+	void	*ptr;
 	int		w;
 	int		h;
 }				t_win;
 
 typedef struct s_map
 {
+	int		already;
 	int		rows;
 	int		cols;
 	int		max_cols;
@@ -282,6 +286,8 @@ void				ft_normalize_angle(float *angle);
 float				ft_distance(float x1, float y1, float x2, float y2);
 
 void				ft_render_wall_projection(t_sys *s);
+void				ft_set_tex_to_wall(int x, int y, \
+										t_wall_tool *tool, t_sys *s);
 
 int					ft_bitmap(t_sys *s);
 
