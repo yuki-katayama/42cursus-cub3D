@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 19:20:32 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/28 20:05:06 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/04/28 22:52:57 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ int	ft_check_line(t_sys *s, char *line, int row)
 	int	i;
 
 	i = 0;
-	if ((s->map.max_rows == row && line[0] == '\0')
-		|| (s->map.max_rows == row && line[0] == '\0' && s->map.table[s->map.rows][0] == '\0'))
+	if ((s->map.max_rows == row && line[0] == '\0'))
 		return (SUCCESS);
 	if (ft_check_line01(s, line, &i) == 0)
 		ft_check_line02(s, line, &i);
