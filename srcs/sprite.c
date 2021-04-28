@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void ft_find_visible_sprites(int *num_visi_sprs,
+static void	ft_find_visible_sprites(int *num_visi_sprs,
 										t_sprite *visi_sprs, t_sys *s)
 {
 	float	a_spr_pl;
