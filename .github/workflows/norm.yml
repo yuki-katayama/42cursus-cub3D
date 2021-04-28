@@ -30,6 +30,9 @@ jobs:
 
       - name: Run Tester
         run: |
+          make
           cd cub3D_leaks_maps_tester
           npm install
           npm start
+          cd ..
+          make fclean
