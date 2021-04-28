@@ -25,3 +25,9 @@ jobs:
 
       - name: Run Norminette
         run: norminette srcs/.
+
+      - name: Run Tester
+        run: |
+          cd cub3D_leaks_maps_tester
+          npm install
+          npm start
