@@ -1,12 +1,12 @@
-R 600 600
-
-NO ./textures/eagle.xpm
+R 500 500
 
 SO ./textures/mossystone.xpm
 
 WE ./textures/bluestone.xpm
 
 EA ./textures/colorstone.xpm
+
+NO ./textures/eagle.xpm
 
 S ./textures/pillar.xpm
 

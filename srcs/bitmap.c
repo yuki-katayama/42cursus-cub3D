@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bitmap.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/12 19:02:40 by kyuki             #+#    #+#             */
+/*   Updated: 2021/05/12 19:02:41 by kyuki            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	ft_bdata(t_sys *s, int fd)
@@ -24,6 +36,7 @@ static int	ft_bdata(t_sys *s, int fd)
 		i -= 2 * s->win.w;
 	}
 	write(fd, buf, s->win.h * s->win.w * 4);
+	free(buf);
 	return (SUCCESS);
 }
 

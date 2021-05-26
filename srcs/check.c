@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 19:20:32 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/28 22:52:57 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/05/22 16:33:52 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static int	ft_check_line01(t_sys *s, char *line, int *i)
 {
 	if (line[0] == 'R' && line[1] == ' ' && !s->map.already)
 		s->err = ft_set_win(s, line, i);
-	else if (s->win.w <= 0 || s->win.h <= 0)
-		s->err = -13;
 	else if (line[0] == 'N' && line[1] == 'O' \
 				&& line[2] == ' ' && !s->map.already)
 		s->err = ft_set_tex(s, &s->tex.n, line, i);
@@ -71,7 +69,9 @@ int	ft_check_line(t_sys *s, char *line, int row)
 
 static void	ft_check_all2(t_sys *s)
 {
-	if (s->tex.n.ptr == NULL)
+	if (s->win.w <= 0 || s->win.h <= 0)
+		s->err = -13;
+	else if (s->tex.n.ptr == NULL)
 		s->err = -9;
 	else if (s->tex.s.ptr == NULL)
 		s->err = -10;

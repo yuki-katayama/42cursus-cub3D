@@ -86,7 +86,7 @@ val		:	$(MLX) ${OBJS}
 			cp ./minilibx-linux/libmlx_Linux.a .
 			cp ./libft/libft.a .
 			$(CC) -g ${OBJS} libmlx_Linux.a libft.a $(CFLAGS) $(LXFLAGS) -o ${NAME}
-			$(VALGRIND) $(VALFLAGS) ./cub3D ./maps/error.cub
+			$(VALGRIND) $(VALFLAGS) ./cub3D ./map01.cub --save
 
 .PHONY: clean
 clean	:	${MLX}

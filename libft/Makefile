@@ -6,7 +6,7 @@
 #    By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/18 17:12:33 by kyuki             #+#    #+#              #
-#    Updated: 2021/04/05 16:59:14 by kyuki            ###   ########.fr        #
+#    Updated: 2021/05/12 13:59:03 by kyuki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ INCDIR	=	./libft
 
 SRCDIR	=	./
 
-SRCNAME	=	ft_atoi.c \
-			ft_spaceskip.c \
+SRCNAME	=	ft_spaceskip.c \
 			ft_haschar.c \
 			ft_strlen.c \
 			ft_strdup.c \

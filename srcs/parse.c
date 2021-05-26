@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 04:08:32 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/28 20:14:15 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/05/24 11:21:03 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,17 @@ static void	ft_get_map_rows(char *path, t_sys *s)
 	while (ret == 1)
 	{
 		ret = get_next_line(fd, &line);
+		if (ret == -1)
+			break ;
 		s->map.max_rows++;
 		free(line);
 	}
 	close(fd);
+	if (ret == -1)
+	{
+		ft_error(-37, -1);
+		ft_close(s);
+	}
 }
 
 static void	ft_gnl_free(int fd, char **line)
@@ -67,20 +74,12 @@ static int	ft_parse_rows(int fd, t_sys *s)
 	ret = 1;
 	while (ret == 1)
 	{
-		if (ret == -1)
-		{
-			ft_error(-37, -1);
-			ret = -2;
-			break ;
-		}
 		ret = get_next_line(fd, &line);
 		if (ft_check_line(s, line, ++row) == -1)
 			ret = -1;
 		free(line);
 	}
 	s->map.rows++;
-	if (ret == -2)
-		ft_close(s);
 	ft_gnl_free(fd, &line);
 	close(fd);
 	return (ret);
@@ -92,9 +91,12 @@ int	ft_parse(t_sys *s, char *path)
 	int		ret;
 
 	ft_get_map_rows(path, s);
+	ft_create_mlx(s);
 	fd = open(path, O_RDONLY);
 	if (fd == -1 || ft_strchr(path, '/') == NULL || !ft_strchr(path, '/')[1])
 		return (ft_error(-4, -1));
+	if (ft_strcmp(path + ft_strlen(path) - 4, ".cub"))
+		return (ft_error(-38, -1));
 	ret = ft_parse_rows(fd, s);
 	if (ret == -1)
 		return (FAILED);

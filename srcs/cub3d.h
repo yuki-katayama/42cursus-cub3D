@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 03:08:30 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/28 10:50:31 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/05/12 14:00:00 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ int					ft_create_spr_list(t_sys *s);
 
 void				ft_normalize_angle(float *angle);
 float				ft_distance(float x1, float y1, float x2, float y2);
+int					ft_atoi(const char *str, int *i);
 
 void				ft_render_wall_projection(t_sys *s);
 void				ft_set_tex_to_wall(int x, int y, \

@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 23:39:16 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/27 12:29:13 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/05/12 18:26:15 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static void	ft_init02(t_sys *s)
 	s->player.h = PLAYER_HEIGHT;
 	s->player.turn_dir = 0;
 	s->player.walk_dir = 0;
-	s->player.walk_speed = WALK_SPEED;
-	s->player.turn_speed = TURN_SPEED * (PI / 180);
 	s->player.a = FOV * (PI / 180);
 	s->player.num_player = 0;
 }

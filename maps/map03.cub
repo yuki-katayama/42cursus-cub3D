@@ -6,7 +6,7 @@ SO ./textures/mossystone.xpm
 
 WE ./textures/bluestone.xpm
 
-EA ./textures/.xpm
+EA ./textures/bluestone.xpm
 
 S ./textures/Document(256)(256).xpm
 

@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 00:00:56 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/28 10:46:04 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/05/22 16:42:17 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_error03(int e, int i)
 	if (e == -27)
 		printf("Failed to malloc sprite.\n");
 	else if (e == -28)
-		printf("Line %d: Declaring the sprite texture twice.\n", i);
+		printf("Line %d: Declaring the texture twice.\n", i);
 	else if (e == -29)
 		printf("Line %d: Declaring the color twice.\n", i);
 	else if (e == -30)
@@ -36,12 +36,14 @@ static void	ft_error03(int e, int i)
 		printf("Failed to malloc rays.\n");
 	else if (e == -37)
 		printf("Directory was specified.\n");
+	else if (e == -38)
+		printf("No specified .cub file.\n");
 }
 
 static void	ft_error02(int e, int i)
 {
 	if (e == -14)
-		printf("Line %d: Declaring the direction texture twice.\n", i);
+		printf("Line %d: Declaring the texture twice.\n", i);
 	else if (e == -15)
 		printf("Line %d: No texture specified.\n", i);
 	else if (e == -16)
@@ -101,7 +103,7 @@ int	ft_error(int e, int i)
 		ft_error01(e, i);
 	else if (e <= -14 && e >= -26)
 		ft_error02(e, i);
-	else if (e <= -27 && e >= -37)
+	else if (e <= -27 && e >= -38)
 		ft_error03(e, i);
 	return (FAILED);
 }

@@ -6,7 +6,7 @@
 /*   By: kyuki <kyuki@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 02:15:34 by kyuki             #+#    #+#             */
-/*   Updated: 2021/04/05 16:59:04 by kyuki            ###   ########.fr       */
+/*   Updated: 2021/05/12 13:59:08 by kyuki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 
-int		ft_atoi(const char *str, int *i);
 int		ft_spaceskip(const char *str, int *i);
 int		ft_haschar(const char *s, int c);
 int		ft_isdigit(int c);

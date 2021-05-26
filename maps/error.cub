@@ -1,16 +1,16 @@
-R 800 800
-NO ./textures/sample(1920)(1280).xpm
 SO ./textures/sample(640)(426).xpm
 
+F 88,       100,           100
 WE ./textures/sample(5184)(3456).xpm
 
 EA ./textures/eagle.xpm
+R 800 800
 
 S ./textures/barrel.xpm
 
 C 44, 44, 9
 
-F 88,       100,           100
+NO ./textures/sample(1920)(1280).xpm
 
 111111
 1011N1
