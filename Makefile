@@ -56,7 +56,7 @@ OBJS	=	$(SRCS:.c=.o)
 BOBJS	=	$(BSRCS:.c=.o)
 
 .PHONY: all
-all		:	$(NAME)
+all	:	$(NAME) ## Run compile
 
 $(MLX)	:
     		git clone https://github.com/42Paris/minilibx-linux.git $(MLX)
@@ -71,7 +71,7 @@ $(NAME) :	$(MLX) ${OBJS}
 			@echo "Complete\033[0m"
 
 .PHONY: san
-san		:	$(MLX) ${OBJS}
+san	:	$(MLX) ${OBJS} ## Run sanitize
 			@echo "\n\033[0;32mCompiling..."
 			$(MAKE) -C ./libft
 			cp ./minilibx-linux/libmlx_Linux.a .
@@ -81,7 +81,7 @@ san		:	$(MLX) ${OBJS}
 			@echo "Complete\033[0m"
 
 .PHONY: val
-val		:	$(MLX) ${OBJS}
+val	:	$(MLX) ${OBJS} ## Run valgrind
 			$(MAKE) -C ./libft
 			cp ./minilibx-linux/libmlx_Linux.a .
 			cp ./libft/libft.a .
@@ -89,7 +89,7 @@ val		:	$(MLX) ${OBJS}
 			$(VALGRIND) $(VALFLAGS) ./cub3D ./map01.cub --save
 
 .PHONY: clean
-clean	:	${MLX}
+clean	:	${MLX} ## Remove object
 			@echo "\033[0;33mCleaning..."
 			$(RM) $(OBJS) $(BOBJS)
 			$(RM) bitmap.bmp
@@ -98,53 +98,48 @@ clean	:	${MLX}
 			@echo "\033[0m"
 
 .PHONY: fclean
-fclean	:	clean
+fclean	:	clean ## Remove object and static
 			@echo "\033[0;33mRemoving executable..."
 			$(MAKE) fclean -C ./libft
 			$(RM) $(NAME) libft.a libmlx_Linux.a
 			@echo "\033[0m"
 
 .PHONY: re
-re		:	fclean all
+re	:	fclean all ## Retry cmpiles
 
-.PHONY: bonus
-bonus:	fclean $(MLX) $(BOBJS)
-		@echo "\n\033[0;32mCompiling..."
-		$(MAKE) -C ./libft
-		$(MAKE) -C ./minilibx-linux
-		cp ./minilibx-linux/libmlx_Linux.a .
-		cp ./libft/libft.a .
-		$(CC) ${BOBJS} libmlx_Linux.a libft.a $(CFLAGS) $(LXFLAGS) -o ${NAME}
-		@echo "Complete\033[0m"
 
 .PHONY: test1
-test1	:
+test1	: ## Run Normal
 			./$(NAME) maps/map01.cub
 
 .PHONY: test2
-test2	:
+test2	: ## Run Varying image sizes
 			./$(NAME) maps/map02.cub
 
 .PHONY: test3
-test3	:
+test3	: ## Run A lot of sprite
 			./$(NAME) maps/map03.cub
 
 .PHONY: error
-error	:
+error	: ## Run error
 			./$(NAME) maps/error.cub
 
 .PHONY: vast
-vast	:
+vast	: ## Run vast map
 			./$(NAME) maps/vast.cub
 
 .PHONY: big
-big		:
+big	: ## Run big window size
 			./$(NAME) maps/big.cub
 
 .PHONY: small
-small	:
+small	: ## Run small window size
 			./$(NAME) maps/small.cub
 
 .PHONY: bmp
-bmp		:
+bmp	: ## Run bmp output
 			./$(NAME) maps/map03.cub --save
+
+.PHONY: help
+help : ## Display this help
+			@grep -E '^[a-zA-Z1-9_-]+	:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-10s\033[0m %s\n", $$1, $$2}'
